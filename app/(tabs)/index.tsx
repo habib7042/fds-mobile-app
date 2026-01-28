@@ -38,8 +38,8 @@ export default function HomeScreen() {
   const contributionCount = member.contributions.length;
   const averageContribution = contributionCount > 0 ? totalContributions / contributionCount : 0;
 
-  // Calculate adjustments
-  const totalAdjustments = member.adjustments?.reduce((sum, adj) => {
+  // Calculate adjustments from fundAdjustments
+  const totalAdjustments = member.fundAdjustments?.reduce((sum, adj) => {
     return adj.type === "INTEREST" ? sum + adj.amount : sum - adj.amount;
   }, 0) || 0;
 

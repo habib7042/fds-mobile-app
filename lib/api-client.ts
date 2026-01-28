@@ -101,15 +101,18 @@ class APIClient {
       pin,
     });
     
-    if (response.data.token) {
-      await this.setAuthToken(response.data.token);
-    }
-    
-    if (response.data.member?.accountNumber) {
+    // API doesn't return a token, so we'll use a simple flag
+    if (response.data.member) {
+      // Store a dummy token to indicate authenticated state
+      await this.setAuthToken("authenticated");
       await this.setAccountNumber(response.data.member.accountNumber);
+      
+      // Fetch full member data
+      const memberData = await this.getMemberData(response.data.member.accountNumber);
+      return { member: memberData };
     }
     
-    return response.data;
+    throw new Error("Login failed");
   }
 
   /**
@@ -153,6 +156,7 @@ export interface Member {
   updatedAt: string;
   contributions: Contribution[];
   adjustments: Adjustment[];
+  fundAdjustments: FundAdjustment[];
 }
 
 export interface Contribution {
@@ -170,6 +174,15 @@ export interface Contribution {
 export interface Adjustment {
   id: string;
   memberId: string;
+  type: "CHARGE" | "INTEREST";
+  amount: number;
+  date: string;
+  description?: string;
+  createdAt: string;
+}
+
+export interface FundAdjustment {
+  id: string;
   type: "CHARGE" | "INTEREST";
   amount: number;
   date: string;

@@ -44,3 +44,7 @@
 - [x] Fix infinite loading on app start - routing not working
 - [x] Change PIN from 6 digits to 4 digits
 - [x] Hide tab bar on login screen
+- [x] Test API login with provided credentials
+- [x] Verify member data fetching
+- [x] Update API client to handle actual response structure (no token field)
+- [x] Handle fundAdjustments instead of adjustments
