@@ -38,4 +38,7 @@
 - [ ] Test on iOS simulator
 - [ ] Test on Android
 - [ ] Verify all API integrations
-- [ ] Create first checkpoint
+- [x] Create first checkpoint
+
+## Bug Fixes
+- [x] Fix infinite loading on app start - routing not working

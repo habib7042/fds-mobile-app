@@ -34,7 +34,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setAccountNumber(storedAccountNumber);
         
         if (storedAccountNumber) {
-          await fetchMemberData(storedAccountNumber);
+          try {
+            await fetchMemberData(storedAccountNumber);
+          } catch (fetchError) {
+            // If fetching member data fails, clear auth and continue
+            console.error("Failed to fetch member data, clearing auth:", fetchError);
+            await apiClient.clearAuth();
+            setIsAuthenticated(false);
+            setAccountNumber(null);
+          }
         }
       }
     } catch (error) {

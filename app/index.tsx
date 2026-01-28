@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useRouter, useSegments } from "expo-router";
+import { useRouter } from "expo-router";
 import { View, ActivityIndicator } from "react-native";
 import { useAuth } from "@/lib/auth-context";
 
@@ -10,21 +10,17 @@ import { useAuth } from "@/lib/auth-context";
 export default function Index() {
   const { isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
-  const segments = useSegments();
 
   useEffect(() => {
     if (isLoading) return;
 
-    const inAuthGroup = segments[0] === "(tabs)";
-
-    if (!isAuthenticated && inAuthGroup) {
-      // Redirect to login if not authenticated
-      router.replace("/login" as any);
-    } else if (isAuthenticated && !inAuthGroup) {
-      // Redirect to main app if authenticated
+    // Always redirect based on auth state
+    if (isAuthenticated) {
       router.replace("/(tabs)" as any);
+    } else {
+      router.replace("/login" as any);
     }
-  }, [isAuthenticated, isLoading, segments]);
+  }, [isAuthenticated, isLoading]);
 
   // Show loading indicator while checking auth
   return (
