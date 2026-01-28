@@ -40,8 +40,8 @@ export default function LoginScreen() {
       return;
     }
 
-    if (pin.length !== 6) {
-      Alert.alert("Error", "Please enter a 6-digit PIN");
+    if (pin.length !== 4) {
+      Alert.alert("Error", "Please enter a 4-digit PIN");
       return;
     }
 
@@ -71,7 +71,7 @@ export default function LoginScreen() {
   };
 
   const handlePinInput = (digit: string) => {
-    if (pin.length < 6) {
+    if (pin.length < 4) {
       setPin(pin + digit);
     }
   };
@@ -147,7 +147,7 @@ export default function LoginScreen() {
           <View className="mb-6">
             <Text className="text-sm font-medium text-foreground mb-2">PIN</Text>
             <View className="flex-row justify-center gap-2 mb-4">
-              {[0, 1, 2, 3, 4, 5].map((index) => (
+              {[0, 1, 2, 3].map((index) => (
                 <View
                   key={index}
                   className="w-12 h-12 bg-surface border border-border rounded-lg items-center justify-center"
@@ -234,7 +234,7 @@ export default function LoginScreen() {
             onPress={handleLogin}
             className="h-14 bg-primary rounded-full items-center justify-center mt-6"
             activeOpacity={0.8}
-            disabled={loading || mobileNumber.length === 0 || pin.length !== 6}
+            disabled={loading || mobileNumber.length === 0 || pin.length !== 4}
           >
             {loading ? (
               <ActivityIndicator color="#ffffff" />

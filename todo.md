@@ -42,3 +42,5 @@
 
 ## Bug Fixes
 - [x] Fix infinite loading on app start - routing not working
+- [x] Change PIN from 6 digits to 4 digits
+- [x] Hide tab bar on login screen
