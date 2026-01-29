@@ -48,3 +48,7 @@
 - [x] Verify member data fetching
 - [x] Update API client to handle actual response structure (no token field)
 - [x] Handle fundAdjustments instead of adjustments
+- [x] Fix balance calculation to correctly sum contributions and adjustments
+- [x] Display profile image from API
+- [x] Create adjustments breakdown screen
+- [x] Add visual indicator for pull-to-refresh

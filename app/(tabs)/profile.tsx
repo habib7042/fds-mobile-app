@@ -1,4 +1,4 @@
-import { ScrollView, Text, View, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
+import { ScrollView, Text, View, TouchableOpacity, Alert, ActivityIndicator, Image } from "react-native";
 import { useRouter } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
 import { useAuth } from "@/lib/auth-context";
@@ -65,9 +65,12 @@ export default function ProfileScreen() {
           <View className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-6 shadow-lg">
             <View className="items-center">
               {/* Profile Avatar */}
-              <View className="w-24 h-24 bg-white/20 rounded-full items-center justify-center mb-4">
+              <View className="w-24 h-24 bg-white/20 rounded-full items-center justify-center mb-4 overflow-hidden">
                 {member.profileImage ? (
-                  <Text className="text-4xl">👤</Text>
+                  <Image
+                    source={{ uri: member.profileImage }}
+                    style={{ width: 96, height: 96 }}
+                  />
                 ) : (
                   <IconSymbol name="person.fill" size={48} color="#ffffff" />
                 )}

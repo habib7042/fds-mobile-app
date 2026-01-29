@@ -39,8 +39,14 @@ export default function HomeScreen() {
   const averageContribution = contributionCount > 0 ? totalContributions / contributionCount : 0;
 
   // Calculate adjustments from fundAdjustments
+  // INTEREST adds to balance, CHARGE subtracts from balance
   const totalAdjustments = member.fundAdjustments?.reduce((sum, adj) => {
-    return adj.type === "INTEREST" ? sum + adj.amount : sum - adj.amount;
+    if (adj.type === "INTEREST") {
+      return sum + adj.amount;
+    } else if (adj.type === "CHARGE") {
+      return sum - adj.amount;
+    }
+    return sum;
   }, 0) || 0;
 
   const balance = totalContributions + totalAdjustments;
@@ -135,6 +141,23 @@ export default function HomeScreen() {
                 <View className="ml-3">
                   <Text className="text-base font-semibold text-foreground">My Profile</Text>
                   <Text className="text-xs text-muted">View account details</Text>
+                </View>
+              </View>
+              <IconSymbol name="chevron.right" size={20} color={colors.muted} />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => router.push("/(tabs)/adjustments" as any)}
+              className="bg-surface rounded-xl p-4 flex-row items-center justify-between border border-border"
+              activeOpacity={0.7}
+            >
+              <View className="flex-row items-center">
+                <View className="w-10 h-10 bg-primary/10 rounded-full items-center justify-center">
+                  <IconSymbol name="dollarsign.circle.fill" size={20} color={colors.primary} />
+                </View>
+                <View className="ml-3">
+                  <Text className="text-base font-semibold text-foreground">Adjustments</Text>
+                  <Text className="text-xs text-muted">Interest & charges</Text>
                 </View>
               </View>
               <IconSymbol name="chevron.right" size={20} color={colors.muted} />
