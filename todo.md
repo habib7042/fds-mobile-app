@@ -52,3 +52,9 @@
 - [x] Display profile image from API
 - [x] Create adjustments breakdown screen
 - [x] Add visual indicator for pull-to-refresh
+
+## New Features
+- [x] Create PDF statement generator utility
+- [x] Add download button to profile screen
+- [x] Handle file permissions and storage
+- [x] Show download success/error notifications

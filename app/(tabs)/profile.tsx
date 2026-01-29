@@ -1,14 +1,32 @@
 import { ScrollView, Text, View, TouchableOpacity, Alert, ActivityIndicator, Image } from "react-native";
+import { useState } from "react";
 import { useRouter } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
 import { useAuth } from "@/lib/auth-context";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { useColors } from "@/hooks/use-colors";
+import { generateAndDownloadStatement } from "@/lib/pdf-generator";
 
 export default function ProfileScreen() {
   const { member, isLoading, logout } = useAuth();
   const router = useRouter();
   const colors = useColors();
+  const [downloading, setDownloading] = useState(false);
+
+  const handleDownloadStatement = async () => {
+    if (!member) return;
+    
+    setDownloading(true);
+    try {
+      await generateAndDownloadStatement(member);
+      Alert.alert("Success", "Statement downloaded successfully!");
+    } catch (error) {
+      console.error("Download failed:", error);
+      Alert.alert("Error", "Failed to download statement. Please try again.");
+    } finally {
+      setDownloading(false);
+    }
+  };
 
   const handleLogout = () => {
     Alert.alert(
@@ -203,8 +221,27 @@ export default function ProfileScreen() {
           </View>
         )}
 
-        {/* Logout Button */}
+        {/* Download Statement Button */}
         <View className="px-6 mt-4">
+          <TouchableOpacity
+            onPress={handleDownloadStatement}
+            disabled={downloading}
+            className="bg-primary/10 border border-primary/20 rounded-xl p-4 flex-row items-center justify-center"
+            activeOpacity={0.7}
+          >
+            {downloading ? (
+              <ActivityIndicator color={colors.primary} />
+            ) : (
+              <>
+                <IconSymbol name="arrow.right.circle.fill" size={20} color={colors.primary} />
+                <Text className="text-base font-semibold text-primary ml-2">Download Statement</Text>
+              </>
+            )}
+          </TouchableOpacity>
+        </View>
+
+        {/* Logout Button */}
+        <View className="px-6 mt-3">
           <TouchableOpacity
             onPress={handleLogout}
             className="bg-error/10 border border-error/20 rounded-xl p-4 flex-row items-center justify-center"
