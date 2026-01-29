@@ -1,5 +1,10 @@
-import React, { createContext, useContext, useState, useEffect, type ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import * as Notifications from "expo-notifications";
 import { apiClient, type Member } from "./api-client";
+import {
+  scheduleMonthlyStatementReminder,
+  setupNotificationResponseHandler,
+} from "./notification-service";
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -23,6 +28,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     checkAuth();
   }, []);
+
+  // Set up notifications when authenticated
+  useEffect(() => {
+    if (isAuthenticated && !isLoading) {
+      setupNotifications();
+    }
+  }, [isAuthenticated, isLoading]);
+
+  const setupNotifications = async () => {
+    try {
+      // Schedule monthly statement reminder
+      await scheduleMonthlyStatementReminder();
+
+      // Set up notification response handler
+      setupNotificationResponseHandler(() => {
+        console.log("Statement reminder tapped");
+      });
+    } catch (error) {
+      console.error("Failed to setup notifications:", error);
+    }
+  };
 
   const checkAuth = async () => {
     try {
@@ -117,3 +143,5 @@ export function useAuth() {
   }
   return context;
 }
+
+export { scheduleMonthlyStatementReminder };

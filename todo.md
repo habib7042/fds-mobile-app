@@ -58,3 +58,10 @@
 - [x] Add download button to profile screen
 - [x] Handle file permissions and storage
 - [x] Show download success/error notifications
+
+## Push Notifications
+- [x] Set up push notification permissions
+- [x] Create notification service utility
+- [x] Schedule monthly statement reminders
+- [x] Handle notification responses
+- [x] Add notification settings screen
