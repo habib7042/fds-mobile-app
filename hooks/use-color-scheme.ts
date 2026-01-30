@@ -1,5 +1,7 @@
-import { useThemeContext } from "@/lib/theme-provider";
+import { useColorScheme as useRNColorScheme } from "react-native";
 
-export function useColorScheme() {
-  return useThemeContext().colorScheme;
+export type ColorScheme = "light" | "dark" | null | undefined;
+
+export function useColorScheme(): ColorScheme {
+  return useRNColorScheme();
 }

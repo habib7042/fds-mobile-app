@@ -65,3 +65,6 @@
 - [x] Schedule monthly statement reminders
 - [x] Handle notification responses
 - [x] Add notification settings screen
+
+## Build Issues
+- [x] Fix pnpm install error on Android build (removed server dependencies)
