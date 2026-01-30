@@ -2,7 +2,6 @@ import { Tabs, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useEffect } from "react";
 
-import { HapticTab } from "@/components/haptic-tab";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Platform, View, ActivityIndicator } from "react-native";
 import { useColors } from "@/hooks/use-colors";
@@ -42,7 +41,6 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: colors.tint,
         headerShown: false,
-        tabBarButton: HapticTab,
         tabBarStyle: {
           paddingTop: 8,
           paddingBottom: bottomPadding,
