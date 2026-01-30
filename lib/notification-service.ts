@@ -122,14 +122,14 @@ export async function scheduleMonthlyStatementReminder(): Promise<void> {
         badge: 1,
       },
       trigger: {
-        type: "calendar",
+        type: Notifications.SchedulableTriggerInputTypes.CALENDAR,
         year: nextReminder.getFullYear(),
         month: nextReminder.getMonth() + 1,
         day: nextReminder.getDate(),
         hour: nextReminder.getHours(),
         minute: nextReminder.getMinutes(),
         repeats: true, // Repeat monthly
-      } as any,
+      },
     });
 
     console.log("Monthly statement reminder scheduled for:", nextReminder);

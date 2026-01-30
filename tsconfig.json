@@ -11,12 +11,13 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "moduleResolution": "node",
+    "baseUrl": ".",
     "types": [
       "node",
       "nativewind/types"
     ],
     "paths": {
-      "@/*": ["./"]
+      "@/*": ["./*"]
     }
   },
   "include": [
