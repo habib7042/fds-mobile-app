@@ -1,0 +1,3 @@
+[2026-01-31T11:57:10.916Z] › Detected a change in babel.config.js. Restart the server to see the new results. You may need to clear the bundler cache with the --clear flag for your changes to take effect.
+[2026-01-31T11:57:10.918Z] › Detected a change in metro.config.js. Restart the server to see the new results.
+[2026-01-31T11:57:25.937Z] › Detected a change in babel.config.js. Restart the server to see the new results. You may need to clear the bundler cache with the --clear flag for your changes to take effect.
