@@ -170,14 +170,14 @@ export default function ProfileScreen() {
               
               {member.fatherName && (
                 <View className={`p-4 ${(member.dob || member.nid) ? 'border-t border-border' : ''}`}>
-                  <Text className="text-xs text-muted">Father's Name</Text>
+                  <Text className="text-xs text-muted">Father&apos;s Name</Text>
                   <Text className="text-base font-medium text-foreground mt-1">{member.fatherName}</Text>
                 </View>
               )}
               
               {member.motherName && (
                 <View className={`p-4 ${(member.dob || member.nid || member.fatherName) ? 'border-t border-border' : ''}`}>
-                  <Text className="text-xs text-muted">Mother's Name</Text>
+                  <Text className="text-xs text-muted">Mother&apos;s Name</Text>
                   <Text className="text-base font-medium text-foreground mt-1">{member.motherName}</Text>
                 </View>
               )}

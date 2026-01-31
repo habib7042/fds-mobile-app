@@ -66,23 +66,23 @@ export default function HomeScreen() {
           <Text className="text-sm text-muted mt-1">Account #{member.accountNumber}</Text>
         </View>
 
-        {/* Balance Card */}
+        {/* Balance Card - Updated to use Primary Blue background */}
         <View className="mx-6 mb-6">
           <View className="bg-primary rounded-2xl p-6 shadow-lg">
             <View className="flex-row items-center mb-2">
               <IconSymbol name="dollarsign.circle.fill" size={24} color="#ffffff" />
-              <Text className="text-white/80 text-sm ml-2">Total Balance</Text>
+              <Text className="text-white/90 text-sm ml-2 font-medium">Main Balance</Text>
             </View>
             <Text className="text-white text-4xl font-bold">৳{balance.toFixed(2)}</Text>
             <View className="flex-row items-center mt-4 pt-4 border-t border-white/20">
               <View className="flex-1">
-                <Text className="text-white/70 text-xs">Contributions</Text>
-                <Text className="text-white text-lg font-semibold">৳{totalContributions.toFixed(2)}</Text>
+                <Text className="text-white/80 text-xs font-medium uppercase tracking-wider">Contributions</Text>
+                <Text className="text-white text-lg font-bold">৳{totalContributions.toFixed(2)}</Text>
               </View>
               {totalAdjustments !== 0 && (
                 <View className="flex-1">
-                  <Text className="text-white/70 text-xs">Adjustments</Text>
-                  <Text className={`text-lg font-semibold ${totalAdjustments >= 0 ? 'text-white' : 'text-red-300'}`}>
+                  <Text className="text-white/80 text-xs font-medium uppercase tracking-wider">Adjustments</Text>
+                  <Text className={`text-lg font-bold ${totalAdjustments >= 0 ? 'text-white' : 'text-red-300'}`}>
                     {totalAdjustments >= 0 ? '+' : ''}৳{totalAdjustments.toFixed(2)}
                   </Text>
                 </View>
@@ -118,8 +118,8 @@ export default function HomeScreen() {
               activeOpacity={0.7}
             >
               <View className="flex-row items-center">
-                <View className="w-10 h-10 bg-primary/10 rounded-full items-center justify-center">
-                  <IconSymbol name="list.bullet" size={20} color={colors.primary} />
+                <View className="w-10 h-10 bg-success/10 rounded-full items-center justify-center">
+                  <IconSymbol name="list.bullet" size={20} color={colors.success} />
                 </View>
                 <View className="ml-3">
                   <Text className="text-base font-semibold text-foreground">View Contributions</Text>
@@ -141,23 +141,6 @@ export default function HomeScreen() {
                 <View className="ml-3">
                   <Text className="text-base font-semibold text-foreground">My Profile</Text>
                   <Text className="text-xs text-muted">View account details</Text>
-                </View>
-              </View>
-              <IconSymbol name="chevron.right" size={20} color={colors.muted} />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => router.push("/(tabs)/adjustments" as any)}
-              className="bg-surface rounded-xl p-4 flex-row items-center justify-between border border-border"
-              activeOpacity={0.7}
-            >
-              <View className="flex-row items-center">
-                <View className="w-10 h-10 bg-primary/10 rounded-full items-center justify-center">
-                  <IconSymbol name="dollarsign.circle.fill" size={20} color={colors.primary} />
-                </View>
-                <View className="ml-3">
-                  <Text className="text-base font-semibold text-foreground">Adjustments</Text>
-                  <Text className="text-xs text-muted">Interest & charges</Text>
                 </View>
               </View>
               <IconSymbol name="chevron.right" size={20} color={colors.muted} />

@@ -14,29 +14,29 @@ export interface ThemeColorPalette {
 }
 
 const lightColors: ThemeColorPalette = {
-  primary: "#0a7ea4",
+  primary: "#2563EB", // Blue
   background: "#ffffff",
   surface: "#f5f5f5",
   foreground: "#11181C",
   muted: "#687076",
   border: "#E5E7EB",
-  success: "#22C55E",
-  warning: "#F59E0B",
-  error: "#EF4444",
-  tint: "#0a7ea4",
+  success: "#16A34A", // Green
+  warning: "#CA8A04", // Yellow
+  error: "#DC2626", // Red
+  tint: "#2563EB",
 };
 
 const darkColors: ThemeColorPalette = {
-  primary: "#0a7ea4",
+  primary: "#3B82F6", // Lighter Blue for dark mode
   background: "#151718",
   surface: "#1e2022",
   foreground: "#ECEDEE",
   muted: "#9BA1A6",
   border: "#334155",
-  success: "#4ADE80",
-  warning: "#FBBF24",
-  error: "#F87171",
-  tint: "#0a7ea4",
+  success: "#22C55E", // Lighter Green
+  warning: "#EAB308", // Lighter Yellow
+  error: "#EF4444", // Lighter Red
+  tint: "#3B82F6",
 };
 
 export function useColors(): ThemeColorPalette {
