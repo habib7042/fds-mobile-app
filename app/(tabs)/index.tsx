@@ -63,7 +63,10 @@ export default function HomeScreen() {
       >
         {/* Header */}
         <View className="px-6 pt-6 pb-4">
-          <Text className="text-sm text-muted">Welcome back,</Text>
+          <View className="flex-row items-center justify-between">
+            <Text className="text-sm text-muted">Welcome back,</Text>
+            <Text className="text-xs text-muted/50">v1.1</Text>
+          </View>
           <Text className="text-2xl font-bold text-foreground mt-1">{member.name}</Text>
           <Text className="text-sm text-muted mt-1">Account #{member.accountNumber}</Text>
         </View>

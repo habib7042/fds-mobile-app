@@ -23,6 +23,9 @@ const MAPPING = {
   "dollarsign.circle.fill": "attach-money",
   "calendar": "calendar-today",
   "arrow.right.circle.fill": "arrow-forward",
+  "eye.fill": "visibility",
+  "eye.slash.fill": "visibility-off",
+  "gear": "settings",
 } as IconMapping;
 
 /**
