@@ -21,7 +21,6 @@ const bundleId =
       return /^[a-zA-Z]/.test(segment) ? segment : "x" + segment;
     })
     .join(".") || "space.manus.app";
-
 // Extract timestamp from bundle ID and prefix with "manus" for deep link scheme
 // e.g., "space.manus.my.app.t20240115103045" -> "manus20240115103045"
 const timestamp = bundleId.split(".").pop()?.replace(/^t/, "") ?? "";
@@ -31,7 +30,8 @@ const env = {
   // App branding - update these values directly (do not use env vars)
   appName: "FDS Member",
   appSlug: "fds-mobile-app",
-  // S3 URL of the app logo
+  // S3 URL of the app logo - set this to the URL returned by generate_image when creating custom logo
+  // Leave empty to use the default icon from assets/images/icon.png
   logoUrl: "",
   scheme: schemeFromBundleId,
   iosBundleId: bundleId,
@@ -45,29 +45,16 @@ const config: ExpoConfig = {
   orientation: "portrait",
   icon: "./assets/images/icon.png",
   scheme: env.scheme,
-
-  /**
-   * 🔑 REQUIRED for EAS Build (dynamic config)
-   */
-  extra: {
-    eas: {
-      projectId: "4d4cfa78-7436-4cba-997c-0b2971d8c2f8",
-    },
-  },
-
   userInterfaceStyle: "automatic",
   newArchEnabled: true,
-
   ios: {
     supportsTablet: true,
     bundleIdentifier: env.iosBundleId,
-    infoPlist: {
-      ITSAppUsesNonExemptEncryption: false,
-    },
+    "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
   },
-
   android: {
-    package: env.androidPackage,
     adaptiveIcon: {
       backgroundColor: "#E6F4FE",
       foregroundImage: "./assets/images/android-icon-foreground.png",
@@ -76,6 +63,7 @@ const config: ExpoConfig = {
     },
     edgeToEdgeEnabled: true,
     predictiveBackGestureEnabled: false,
+    package: env.androidPackage,
     permissions: ["POST_NOTIFICATIONS"],
     intentFilters: [
       {
@@ -91,20 +79,17 @@ const config: ExpoConfig = {
       },
     ],
   },
-
   web: {
     bundler: "metro",
     output: "static",
     favicon: "./assets/images/favicon.png",
   },
-
   plugins: [
     "expo-router",
     [
       "expo-audio",
       {
-        microphonePermission:
-          "Allow $(PRODUCT_NAME) to access your microphone.",
+        microphonePermission: "Allow $(PRODUCT_NAME) to access your microphone.",
       },
     ],
     [
@@ -136,7 +121,6 @@ const config: ExpoConfig = {
       },
     ],
   ],
-
   experiments: {
     typedRoutes: true,
     reactCompiler: true,

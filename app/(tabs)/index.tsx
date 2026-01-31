@@ -5,10 +5,12 @@ import { ScreenContainer } from "@/components/screen-container";
 import { useAuth } from "@/lib/auth-context";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { useColors } from "@/hooks/use-colors";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function HomeScreen() {
   const { member, isLoading, refreshMemberData } = useAuth();
   const [refreshing, setRefreshing] = useState(false);
+  const [showBalance, setShowBalance] = useState(true);
   const router = useRouter();
   const colors = useColors();
 
@@ -66,29 +68,53 @@ export default function HomeScreen() {
           <Text className="text-sm text-muted mt-1">Account #{member.accountNumber}</Text>
         </View>
 
-        {/* Balance Card - Updated to use Primary Blue background */}
-        <View className="mx-6 mb-6">
-          <View className="bg-primary rounded-2xl p-6 shadow-lg">
-            <View className="flex-row items-center mb-2">
-              <IconSymbol name="dollarsign.circle.fill" size={24} color="#ffffff" />
-              <Text className="text-white/90 text-sm ml-2 font-medium">Main Balance</Text>
+        {/* Balance Card */}
+        <View className="mx-6 mb-6 shadow-lg rounded-2xl overflow-hidden">
+          <LinearGradient
+            colors={[colors.primary, '#4f8bff']} // Gradient using primary color
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            className="p-6 rounded-2xl"
+          >
+            <View className="flex-row items-center justify-between mb-2">
+              <View className="flex-row items-center">
+                <IconSymbol name="dollarsign.circle.fill" size={24} color="#ffffff" />
+                <Text className="text-white/90 text-sm ml-2 font-medium">Main Balance</Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => setShowBalance(!showBalance)}
+                className="p-1 bg-white/10 rounded-full"
+                activeOpacity={0.7}
+              >
+                <IconSymbol
+                  name={showBalance ? "eye.fill" : "eye.slash.fill"}
+                  size={20}
+                  color="#ffffff"
+                />
+              </TouchableOpacity>
             </View>
-            <Text className="text-white text-4xl font-bold">৳{balance.toFixed(2)}</Text>
+
+            <Text className="text-white text-4xl font-bold">
+              {showBalance ? `৳${balance.toFixed(2)}` : "৳ ****"}
+            </Text>
+
             <View className="flex-row items-center mt-4 pt-4 border-t border-white/20">
               <View className="flex-1">
                 <Text className="text-white/80 text-xs font-medium uppercase tracking-wider">Contributions</Text>
-                <Text className="text-white text-lg font-bold">৳{totalContributions.toFixed(2)}</Text>
+                <Text className="text-white text-lg font-bold">
+                  {showBalance ? `৳${totalContributions.toFixed(2)}` : "৳ ****"}
+                </Text>
               </View>
               {totalAdjustments !== 0 && (
                 <View className="flex-1">
                   <Text className="text-white/80 text-xs font-medium uppercase tracking-wider">Adjustments</Text>
                   <Text className={`text-lg font-bold ${totalAdjustments >= 0 ? 'text-white' : 'text-red-300'}`}>
-                    {totalAdjustments >= 0 ? '+' : ''}৳{totalAdjustments.toFixed(2)}
+                    {showBalance ? `${totalAdjustments >= 0 ? '+' : ''}৳${totalAdjustments.toFixed(2)}` : "৳ ****"}
                   </Text>
                 </View>
               )}
             </View>
-          </View>
+          </LinearGradient>
         </View>
 
         {/* Quick Stats */}
@@ -102,7 +128,9 @@ export default function HomeScreen() {
             </View>
             <View className="flex-1 bg-surface rounded-xl p-4 border border-border">
               <IconSymbol name="dollarsign.circle.fill" size={20} color={colors.success} />
-              <Text className="text-2xl font-bold text-foreground mt-2">৳{averageContribution.toFixed(0)}</Text>
+              <Text className="text-2xl font-bold text-foreground mt-2">
+                 {showBalance ? `৳${averageContribution.toFixed(0)}` : "৳ ****"}
+              </Text>
               <Text className="text-xs text-muted mt-1">Avg/Month</Text>
             </View>
           </View>
@@ -171,7 +199,9 @@ export default function HomeScreen() {
                       <Text className="text-xs text-muted mt-1">{contribution.description}</Text>
                     )}
                   </View>
-                  <Text className="text-base font-semibold text-success">৳{contribution.amount.toFixed(2)}</Text>
+                  <Text className="text-base font-semibold text-success">
+                     {showBalance ? `৳${contribution.amount.toFixed(2)}` : "৳ ****"}
+                  </Text>
                 </View>
               ))}
             </View>
